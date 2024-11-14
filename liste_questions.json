@@ -5,6 +5,12 @@
             "response_type": "texte",
             "response_text": "Avec les doigts",
             "question_id": 1
+        },
+        {
+            "question_text": "qui dit \"mangez des pommes\" ?",
+            "response_type": "texte",
+            "response_text": "Jacques Chirac",
+            "question_id": 2
         }
     ]
 }
