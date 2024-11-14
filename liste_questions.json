@@ -1,0 +1,10 @@
+{
+    "questions": [
+        {
+            "question_text": "Comment on fait les b\u00e9b\u00e9s ?",
+            "response_type": "texte",
+            "response_text": "Avec les doigts",
+            "question_id": 1
+        }
+    ]
+}
