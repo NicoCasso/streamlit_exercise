@@ -1,5 +1,8 @@
 import json as js
-from pages.questionfields import QuestionFields
+try :
+    from pages.questionfields import QuestionFields
+except :
+    from questionfields import QuestionFields
 
 FILENAME = "liste_questions.json"
 
@@ -39,11 +42,12 @@ def validate_question_data(question_data : dict) :
         return False    
     
     #question_data["reponse_type"] 
-    if question_data[QuestionFields.RESPONSES.value] == "" :
-        return False
+    # if question_data[QuestionFields.RESPONSES.value] == [] :
+    #     return False
     
     return True
 
 def save(filename : str, dico : dict):
     with open(filename, mode="w", encoding="utf-8") as  write_file:
+        #js.dumps(dico, write_file, ensure_ascii=False, indent=4)
         write_file.write(js.dumps(dico, indent=4))

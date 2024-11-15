@@ -4,7 +4,11 @@
             "question_text": "Comment on fait les b\u00e9b\u00e9s ?",
             "response_type": "texte",
             "responses": [
-                {"response_id": 1, "response_text": "Avec les doigts", "response_correct": 0 }
+                {
+                    "response_id": 1,
+                    "response_text": "Avec les doigts",
+                    "response_correct": 0
+                }
             ],
             "question_id": 1
         },
@@ -12,9 +16,29 @@
             "question_text": "qui dit \"mangez des pommes\" ?",
             "response_type": "texte",
             "responses": [
-                {"response_id": 1, "response_text": "Jacques Chirac", "response_correct": 1}
+                {
+                    "response_id": 1,
+                    "response_text": "Jacques Chirac",
+                    "response_correct": 1
+                }
             ],
             "question_id": 2
+        },
+        {
+            "question_text": "Traderidera",
+            "responses": [
+                {
+                    "response_id": 1,
+                    "response_text": "rep 1",
+                    "response_correct": false
+                },
+                {
+                    "response_id": 2,
+                    "response_text": "rep 2",
+                    "response_correct": true
+                }
+            ],
+            "question_id": 3
         }
     ]
 }
