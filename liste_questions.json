@@ -7,7 +7,7 @@
                 {
                     "response_id": 1,
                     "response_text": "Avec les doigts",
-                    "response_correct": 0
+                    "response_correct": false
                 }
             ],
             "question_id": 1
@@ -19,7 +19,7 @@
                 {
                     "response_id": 1,
                     "response_text": "Jacques Chirac",
-                    "response_correct": 1
+                    "response_correct": true
                 }
             ],
             "question_id": 2
@@ -39,6 +39,59 @@
                 }
             ],
             "question_id": 3
+        },
+        {
+            "question_text": "blabla",
+            "responses": [
+                {
+                    "response_id": 1,
+                    "response_text": "truc",
+                    "response_correct": false
+                },
+                {
+                    "response_id": 2,
+                    "response_text": "Machin",
+                    "response_correct": false
+                },
+                {
+                    "response_id": 3,
+                    "response_text": "Bidule",
+                    "response_correct": true
+                }
+            ],
+            "question_id": 4
+        },
+        {
+            "question_text": "premi\u00e8re",
+            "responses": [
+                {
+                    "response_id": 1,
+                    "response_text": "une r\u00e9ponse",
+                    "response_correct": false
+                },
+                {
+                    "response_id": 2,
+                    "response_text": "une autre r\u00e9ponse",
+                    "response_correct": false
+                }
+            ],
+            "question_id": 5
+        },
+        {
+            "question_text": "padawan",
+            "responses": [
+                {
+                    "response_id": 1,
+                    "response_text": "je suis",
+                    "response_correct": false
+                },
+                {
+                    "response_id": 2,
+                    "response_text": "tu es",
+                    "response_correct": true
+                }
+            ],
+            "question_id": 6
         }
     ]
 }

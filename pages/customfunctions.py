@@ -1,8 +1,5 @@
 import json as js
-try :
-    from pages.questionfields import QuestionFields
-except :
-    from questionfields import QuestionFields
+from pages.questionfields import QuestionFields
 
 FILENAME = "liste_questions.json"
 

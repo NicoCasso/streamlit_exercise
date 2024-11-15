@@ -15,18 +15,19 @@ if st.session_state.get("current_question") == None :
 else :
     st.write("  Question actuelle :")
 
-form_question_text = st.text_area("Enoncé")
+
 
 current_question = {}
 if st.session_state.get("current_question") == None :
+    form_question_text = st.text_area("Enoncé")
     current_question[QuestionFields.QUESTIONTEXT.value] = form_question_text
     current_question[QuestionFields.RESPONSES.value] = []
     st.session_state["current_question"] =  current_question
-    st.write("Pas de réponses.")
+    st.write("Pas de réponse.")
 else :
     current_question = st.session_state["current_question"]
     #update question if it has changed :
-    current_question[QuestionFields.QUESTIONTEXT.value] = form_question_text
+    form_question_text = st.text_area("Enoncé", current_question[QuestionFields.QUESTIONTEXT.value])
     nb_responses =  len(current_question[QuestionFields.RESPONSES.value])
     if nb_responses == 0 :
         st.write("Pas de réponses.")
@@ -41,31 +42,27 @@ for response in responses :
         response[QuestionFields.RESPONSETEXT.value],
         response[QuestionFields.RESPONSECORRECT.value]))
 
-# if form_response_type == FieldType.MULTIPLE.value:
-
 current_question[QuestionFields.QUESTIONTEXT.value] = form_question_text
-# current_question[QuestionFields.RESPONSETYPE.value] = form_response_type
 
-st.write("ajouter une réponse à la question")
-form_response_text = st.text_input("Texte de la réponse")
-form_response_correct = st.checkbox("réponse correcte")
-if st.button('Ajouter') :
-    if form_question_text != "" :
-        responses = current_question[QuestionFields.RESPONSES.value]
-        current_response = {}
-        current_response[QuestionFields.RESPONSEID.value] = cf.get_id(responses, QuestionFields.RESPONSEID.value)
-        current_response[QuestionFields.RESPONSETEXT.value] = form_response_text
-        current_response[QuestionFields.RESPONSECORRECT.value] = form_response_correct
-        cast(list,responses).append(current_response)
-        current_question[QuestionFields.RESPONSES.value] = responses
-        st.session_state["current_question"] = current_question
+with st.form("response_form", clear_on_submit=True):
+    st.write("Définir une réponse à cette question :")
+    form_response_text = st.text_input("Texte de la réponse")
+    form_response_correct = st.checkbox("Cette réponse est correcte")
+    if st.form_submit_button('Ajouter cette réponse') :
+        if form_question_text != "" :
+            responses = current_question[QuestionFields.RESPONSES.value]
+            current_response = {}
+            current_response[QuestionFields.RESPONSEID.value] = cf.get_id(responses, QuestionFields.RESPONSEID.value)
+            current_response[QuestionFields.RESPONSETEXT.value] = form_response_text
+            current_response[QuestionFields.RESPONSECORRECT.value] = form_response_correct
 
-    form_response_text = ""
-    form_response_correct = False
-    st.rerun()
+            cast(list,responses).append(current_response)
+            current_question[QuestionFields.RESPONSES.value] = responses
+            st.session_state["current_question"] = current_question
 
 st.session_state["current_question"] = current_question
 
+#DEBUG !
 st.write(st.session_state)
 
 if st.button('Enregistrer la question') :
