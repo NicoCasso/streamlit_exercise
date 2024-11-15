@@ -13,7 +13,7 @@ def load(filename : str) -> dict :
 
     if not exist : 
         with open(filename, mode="x", encoding="utf-8") as  write_file:
-            root_text = "{\"" + QuestionFields.ROOT.value + "\": []}"
+            root_text = "{\"" + QuestionFields.QUESTIONS.value + "\": []}"
             write_file.write(root_text)
 
     liste_questions = {}
@@ -22,8 +22,6 @@ def load(filename : str) -> dict :
         liste_questions = js.loads(content)
 
     return liste_questions
-
-
 
 def get_id(liste : list[dict], fieldname : str) -> int :
     new_one = 1
@@ -41,7 +39,7 @@ def validate_question_data(question_data : dict) :
         return False    
     
     #question_data["reponse_type"] 
-    if question_data[QuestionFields.RESPONSETEXT.value] == "" :
+    if question_data[QuestionFields.RESPONSES.value] == "" :
         return False
     
     return True

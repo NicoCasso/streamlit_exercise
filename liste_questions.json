@@ -3,13 +3,17 @@
         {
             "question_text": "Comment on fait les b\u00e9b\u00e9s ?",
             "response_type": "texte",
-            "response_text": "Avec les doigts",
+            "responses": [
+                {"response_id": 1, "response_text": "Avec les doigts", "response_correct": 0 }
+            ],
             "question_id": 1
         },
         {
             "question_text": "qui dit \"mangez des pommes\" ?",
             "response_type": "texte",
-            "response_text": "Jacques Chirac",
+            "responses": [
+                {"response_id": 1, "response_text": "Jacques Chirac", "response_correct": 1}
+            ],
             "question_id": 2
         }
     ]

@@ -21,7 +21,7 @@ with st.form("Formulaire_reponse"):
    st.write(f"question n°{no_question}")
    #my_number = st.slider('Pick a number', 1, 10)
    #my_color = st.selectbox('Pick a color', ['red','orange','green','blue','violet'])
-   st.write(f"question ; {current_question["question_text"]}")
+   st.write(f"question : {current_question["question_text"]}")
    st.write(f"réponse attendue sous forme de {current_question["response_text"]}" )
    form_response_text = st.text_input("réponse provisoire")
 
