@@ -15,8 +15,6 @@ if st.session_state.get("current_question") == None :
 else :
     st.write("  Question actuelle :")
 
-
-
 current_question = {}
 if st.session_state.get("current_question") == None :
     form_question_text = st.text_area("Enoncé")
