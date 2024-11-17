@@ -1,4 +1,5 @@
 import streamlit as st
+from datetime import datetime
 import pandas as pand
 import numpy as nump
 
@@ -56,6 +57,10 @@ if num_question == len(dict_questions) +1 :
     st.write("Score : {0}/{1}".format(correct_answers, len(model_answers)))
 
     if st.button("Recommencer") :
+        now = datetime.today().strftime('%Y-%m-%d_%H-%M')
+        filename = "User_session_{0}.json".format(now)
+        cf.save_session(filename, UserSession(answers = model_answers))
+
         st.session_state.clear()
         st.rerun()
 

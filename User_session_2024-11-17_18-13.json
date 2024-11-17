@@ -1,0 +1,58 @@
+{
+    "answers": [
+        {
+            "question_id": 1,
+            "question_text": "Comment on fait les bébés ?",
+            "answer_text": "Avec les doigts",
+            "is_correct": false
+        },
+        {
+            "question_id": 2,
+            "question_text": "qui dit \"mangez des pommes\" ?",
+            "answer_text": "Jacques Chirac",
+            "is_correct": true
+        },
+        {
+            "question_id": 3,
+            "question_text": "Traderidera",
+            "answer_text": "rep 1",
+            "is_correct": false
+        },
+        {
+            "question_id": 4,
+            "question_text": "blabla",
+            "answer_text": "truc",
+            "is_correct": false
+        },
+        {
+            "question_id": 5,
+            "question_text": "première",
+            "answer_text": "une réponse",
+            "is_correct": false
+        },
+        {
+            "question_id": 6,
+            "question_text": "padawan",
+            "answer_text": "je suis",
+            "is_correct": false
+        },
+        {
+            "question_id": 7,
+            "question_text": "question du dimanche",
+            "answer_text": "réponse du samedi",
+            "is_correct": false
+        },
+        {
+            "question_id": 8,
+            "question_text": "Nouvelle question du dimanche",
+            "answer_text": "Nouvelle réponse du samedi",
+            "is_correct": false
+        },
+        {
+            "question_id": 9,
+            "question_text": "Neuvième porte",
+            "answer_text": "Le silence est d'or",
+            "is_correct": false
+        }
+    ]
+}

@@ -2,10 +2,8 @@ import json as js
 from pages.questionfields import QuestionFields
 from pages.pydanticclasses import *
 
-FILENAME = "Single_question_file.json"
-#USERFILENAME = "Single_answer_file.json"
+FILENAME = "Quiz_questions.json"
 
-#def load(filename : str) -> dict :
 def load_model(filename : str) -> Quiz :
 
     exist = False
@@ -50,8 +48,10 @@ def validate_question_data(question_data : dict) :
     
     return True
 
-#def save(filename : str, dico : dict):
 def save_model(filename : str, quiz : Quiz):
     with open(filename, mode="w", encoding="utf-8") as  write_file:
-        #write_file.write(js.dumps(dico, indent=4))
         write_file.write(quiz.model_dump_json(indent=4))
+
+def save_session(filename : str, session : UserSession):
+    with open(filename, mode="w", encoding="utf-8") as  write_file:
+        write_file.write(session.model_dump_json(indent=4))
