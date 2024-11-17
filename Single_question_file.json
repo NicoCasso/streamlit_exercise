@@ -122,6 +122,22 @@
                     "is_correct": true
                 }
             ]
+        },
+        {
+            "question_id": 9,
+            "question_text": "Neuvième porte",
+            "answers": [
+                {
+                    "answer_id": 1,
+                    "answer_text": "Le silence est d'or",
+                    "is_correct": false
+                },
+                {
+                    "answer_id": 2,
+                    "answer_text": "Ne pas ouvrir",
+                    "is_correct": true
+                }
+            ]
         }
     ]
 }

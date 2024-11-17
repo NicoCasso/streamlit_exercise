@@ -1,8 +1,13 @@
 from pydantic import BaseModel
 
-class UserAswer(BaseModel) :
+class UserAnswer(BaseModel) :
     question_id : int
-    answer_id : int
+    question_text : str
+    answer_text : str
+    is_correct : bool
+
+class UserSession(BaseModel) :
+    answers : list[UserAnswer]
 
 class Answer(BaseModel):
     answer_id : int

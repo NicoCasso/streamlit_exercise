@@ -1,6 +1,6 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
+import pandas as pand
+import numpy as nump
 
 import pages.customfunctions as cf
 from pages.pydanticclasses import *
@@ -10,56 +10,50 @@ quiz = cf.load_model(cf.FILENAME)
 dict_quiz = quiz.model_dump()
 dict_questions = dict_quiz[QuestionFields.QUESTIONS]
 
-no_question = 1
-if st.session_state.get("no_question") != None :
-    no_question = st.session_state["no_question"]
+num_question = 1
+if st.session_state.get("num_question") != None :
+    num_question = st.session_state["num_question"]
 
-if no_question == len(dict_questions):
+if num_question == len(dict_questions) +1 :
     st.title("Résultat du quiz")
-    answers = {}
-    no_question = 1
-    question_count =0
-    answer_count = 0 
+
+    model_answers = []
     for question in dict_questions :
-        question_count+=1
-        answer_key = "question{0}".format(question[QuestionFields.QUESTIONID])
+        current_question_id = question[QuestionFields.QUESTIONID.value]
+        current_question_text = question[QuestionFields.QUESTIONTEXT.value]
+        answer_key = "question{0}".format(current_question_id)
         if st.session_state.get(answer_key) != None :
-             validated =  st.session_state[answer_key]
-             if validated : 
-                 answer_count+=1
-
-             st.write("{0} : {1}".format(answer_key, validated))
-
-        # if value: 
-        #     count += 1
-        #     for answer in question[QuestionFields.RESPONSES] :
-        #         validated = False
-        #         if answer[QuestionFields.RESPONSEID] == st.session_state[answer_key] :
-        #             validated = True
-                
-        #         answers["Question {0}".format(no_question)] = validated
-
-    # table_data = {}
-    # table_data["Question number"] = []
-    # table_data["Answer"] = []
-    # count = 0
-    # for num, validated in answers.items() :
-    #     numbers = table_data["Question number"]
-    #     vals = table_data["Answer"]
-    #     numbers.append(num)
-    #     vals.append(validated)
-    #     table_data["Question number"] = numbers
-    #     table_data["Answer"] = vals
-    #     if validated : 
-    #         count +=1
-
-    # df = pd.DataFrame(data = table_data )
-    # st.table(df)
-
-    # st.write("Score : {0}/{1}".format(count, len(table_data["Answer"])))
-
+            answer_id =  st.session_state[answer_key]
+            user_answer = {}
+            for answer in question[QuestionFields.ANSWERS.value] :
+                if answer[QuestionFields.ANSWERID.value] == answer_id :
+                    user_answer = answer
+                    break
     
-    st.write("Score : {0}/{1}".format(answer_count, question_count))
+            if user_answer !=  {} :
+                current_answer_text = user_answer[QuestionFields.ANSWERTEXT.value]
+                current_answer_correct = user_answer[QuestionFields.ANSWERCORRECT.value]
+            else :
+                current_answer_text = "Pas de réponse"
+                current_answer_correct = False
+
+            user_answer =  UserAnswer( question_id=current_question_id, 
+                question_text = current_question_text, 
+                answer_text = current_answer_text, 
+                is_correct= current_answer_correct)
+            
+            model_answers.append(user_answer)
+      
+    df = pand.DataFrame(data = {
+        'question': list(map(lambda x : x.question_text , model_answers)),  
+        'réponse': list(map(lambda x : x.answer_text ,model_answers)), 
+        'correct' : list(map(lambda x : "VRAI" if x.is_correct else "FAUX" ,model_answers)) } )
+    
+    st.table(df)
+
+    correct_answers = sum(1 for _ in filter(lambda x: x.is_correct==True, model_answers))
+    
+    st.write("Score : {0}/{1}".format(correct_answers, len(model_answers)))
 
     if st.button("Recommencer") :
         st.session_state.clear()
@@ -67,23 +61,21 @@ if no_question == len(dict_questions):
 
 else :
 
-    st.title(f"Le quiz lui même, question n°{no_question}/{len(dict_questions)}")
+    st.title(f"Le quiz lui même, question n°{num_question}/{len(dict_questions)}")
 
-    st.write(st.session_state)
+    # DEBUG !
+    # st.write(st.session_state)
 
-    current_question = dict_questions[no_question-1]
+    current_question = dict_questions[num_question-1]
 
-    #with st.form("Formulaire_reponse"):
-    st.write(f"question n°{no_question}")
+    st.write(f"question n°{num_question}")
     st.text(current_question[QuestionFields.QUESTIONTEXT])
-    #st.write(f"réponse attendue sous forme de {current_question["response_text"]}" )
 
     answers = list(map(lambda answer : answer[QuestionFields.ANSWERTEXT], current_question[QuestionFields.ANSWERS]))
 
     form_radio_answer = st.radio("Votre réponse : ", answers)
     st.write(form_radio_answer)
 
-    # if st.form_submit_button('Comptabiliser cette réponse') :
     if st.button('Comptabiliser cette réponse') :
 
         answer_key = "" 
@@ -97,9 +89,7 @@ else :
         if answer_key != "":
             st.session_state[answer_key] = answer_id
 
-        next = no_question + 1 
-        if next < len(dict_questions) + 1 :
-            st.session_state["no_question"] = no_question + 1
+        st.session_state["num_question"] = num_question + 1 
 
         st.rerun()
             
