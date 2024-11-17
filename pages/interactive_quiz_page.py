@@ -3,22 +3,24 @@ import pandas as pd
 import numpy as np
 
 import pages.customfunctions as cf
+from pages.pydanticclasses import *
 from pages.questionfields import QuestionFields
 
-liste_questions = cf.load(cf.FILENAME)
-questions = liste_questions[QuestionFields.QUESTIONS]
+quiz = cf.load_model(cf.FILENAME)
+dict_quiz = quiz.model_dump()
+dict_questions = dict_quiz[QuestionFields.QUESTIONS]
 
 no_question = 1
 if st.session_state.get("no_question") != None :
     no_question = st.session_state["no_question"]
 
-if no_question == len(questions):
+if no_question == len(dict_questions):
     st.title("Résultat du quiz")
     answers = {}
     no_question = 1
     question_count =0
     answer_count = 0 
-    for question in questions :
+    for question in dict_questions :
         question_count+=1
         answer_key = "question{0}".format(question[QuestionFields.QUESTIONID])
         if st.session_state.get(answer_key) != None :
@@ -65,18 +67,18 @@ if no_question == len(questions):
 
 else :
 
-    st.title(f"Le quiz lui même, question n°{no_question}/{len(questions)}")
+    st.title(f"Le quiz lui même, question n°{no_question}/{len(dict_questions)}")
 
     st.write(st.session_state)
 
-    current_question = questions[no_question-1]
+    current_question = dict_questions[no_question-1]
 
     #with st.form("Formulaire_reponse"):
     st.write(f"question n°{no_question}")
     st.text(current_question[QuestionFields.QUESTIONTEXT])
     #st.write(f"réponse attendue sous forme de {current_question["response_text"]}" )
 
-    answers = list(map(lambda answer : answer[QuestionFields.RESPONSETEXT], current_question[QuestionFields.RESPONSES]))
+    answers = list(map(lambda answer : answer[QuestionFields.ANSWERTEXT], current_question[QuestionFields.ANSWERS]))
 
     form_radio_answer = st.radio("Votre réponse : ", answers)
     st.write(form_radio_answer)
@@ -86,9 +88,9 @@ else :
 
         answer_key = "" 
         answer_id = -1
-        for answer in current_question[QuestionFields.RESPONSES] :
-            if answer[QuestionFields.RESPONSETEXT] == form_radio_answer :
-                answer_id = answer[QuestionFields.RESPONSEID]
+        for answer in current_question[QuestionFields.ANSWERS] :
+            if answer[QuestionFields.ANSWERTEXT] == form_radio_answer :
+                answer_id = answer[QuestionFields.ANSWERID]
                 answer_key = "question{0}".format(current_question[QuestionFields.QUESTIONID])
                 break
 
@@ -96,7 +98,7 @@ else :
             st.session_state[answer_key] = answer_id
 
         next = no_question + 1 
-        if next < len(questions) + 1 :
+        if next < len(dict_questions) + 1 :
             st.session_state["no_question"] = no_question + 1
 
         st.rerun()

@@ -1,9 +1,12 @@
 import json as js
 from pages.questionfields import QuestionFields
+from pages.pydanticclasses import *
 
-FILENAME = "liste_questions.json"
+FILENAME = "Single_question_file.json"
+#USERFILENAME = "Single_answer_file.json"
 
-def load(filename : str) -> dict :
+#def load(filename : str) -> dict :
+def load_model(filename : str) -> Quiz :
 
     exist = False
     try:
@@ -11,17 +14,20 @@ def load(filename : str) -> dict :
         exist = True
     except IOError: pass
 
+    rootQuiz = Quiz(questions=[])
     if not exist : 
         with open(filename, mode="x", encoding="utf-8") as  write_file:
-            root_text = "{\"" + QuestionFields.QUESTIONS.value + "\": []}"
-            write_file.write(root_text)
+            #root_text = "{\"" + QuestionFields.QUESTIONS.value + "\": []}"
+            #write_file.write(root_text)
+            rootQuiz = Quiz(questions=[])
+            write_file.write(rootQuiz.model_dump_json())    
 
-    liste_questions = {}
     with open(filename, mode="r", encoding="utf-8") as read_file:
         content = read_file.read()
-        liste_questions = js.loads(content)
+        #liste_questions = js.loads(content)
+        rootQuiz = Quiz.model_validate_json(content)
 
-    return liste_questions
+    return rootQuiz
 
 def get_id(liste : list[dict], fieldname : str) -> int :
     new_one = 1
@@ -44,7 +50,8 @@ def validate_question_data(question_data : dict) :
     
     return True
 
-def save(filename : str, dico : dict):
+#def save(filename : str, dico : dict):
+def save_model(filename : str, quiz : Quiz):
     with open(filename, mode="w", encoding="utf-8") as  write_file:
-        #js.dumps(dico, write_file, ensure_ascii=False, indent=4)
-        write_file.write(js.dumps(dico, indent=4))
+        #write_file.write(js.dumps(dico, indent=4))
+        write_file.write(quiz.model_dump_json(indent=4))
