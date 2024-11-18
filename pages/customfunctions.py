@@ -15,14 +15,11 @@ def load_model(filename : str) -> Quiz :
     rootQuiz = Quiz(questions=[])
     if not exist : 
         with open(filename, mode="x", encoding="utf-8") as  write_file:
-            #root_text = "{\"" + QuestionFields.QUESTIONS.value + "\": []}"
-            #write_file.write(root_text)
             rootQuiz = Quiz(questions=[])
             write_file.write(rootQuiz.model_dump_json())    
 
     with open(filename, mode="r", encoding="utf-8") as read_file:
         content = read_file.read()
-        #liste_questions = js.loads(content)
         rootQuiz = Quiz.model_validate_json(content)
 
     return rootQuiz
