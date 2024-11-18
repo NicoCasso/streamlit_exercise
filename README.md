@@ -1,8 +1,6 @@
-
-
 Project Specifications
 
-Modalités pédagogiques
+    Modalités pédagogiques
 
     Fonctionnalités obligatoires
 
