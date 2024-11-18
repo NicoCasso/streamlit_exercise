@@ -1,6 +1,7 @@
 import streamlit as st
 
-#streamlit run thursday_page.py
+#To run all execute :
+# streamlit run thursday_page.py
 
 creation_page = st.Page("pages/quiz_creation_page.py")
 #creation_page.title = "Création de quizz"
