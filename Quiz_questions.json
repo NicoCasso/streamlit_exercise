@@ -8,6 +8,16 @@
                     "answer_id": 1,
                     "answer_text": "Avec les doigts",
                     "is_correct": false
+                },
+                {
+                    "answer_id": 2,
+                    "answer_text": "Avec le nez",
+                    "is_correct": false
+                },
+                {
+                    "answer_id": 3,
+                    "answer_text": "Avec des fleurs",
+                    "is_correct": true
                 }
             ]
         },
@@ -19,65 +29,70 @@
                     "answer_id": 1,
                     "answer_text": "Jacques Chirac",
                     "is_correct": true
+                },
+                {
+                    "answer_id": 2,
+                    "answer_text": "Edouard Baer",
+                    "is_correct": false
                 }
             ]
         },
         {
             "question_id": 3,
-            "question_text": "Traderidera",
+            "question_text": "Qu est-ce qui mange des poissons",
             "answers": [
                 {
                     "answer_id": 1,
-                    "answer_text": "rep 1",
-                    "is_correct": false
+                    "answer_text": "les requins",
+                    "is_correct": true
                 },
                 {
                     "answer_id": 2,
-                    "answer_text": "rep 2",
-                    "is_correct": true
+                    "answer_text": "les algues carnivores",
+                    "is_correct": false
                 }
             ]
         },
         {
             "question_id": 4,
-            "question_text": "blabla",
+            "question_text": "franchement ?",
             "answers": [
                 {
                     "answer_id": 1,
-                    "answer_text": "truc",
+                    "answer_text": "nan mais",
                     "is_correct": false
                 },
                 {
                     "answer_id": 2,
-                    "answer_text": "Machin",
+                    "answer_text": "heu...",
                     "is_correct": false
                 },
                 {
                     "answer_id": 3,
-                    "answer_text": "Bidule",
+                    "answer_text": "Bah si",
                     "is_correct": true
                 }
             ]
         },
         {
             "question_id": 5,
-            "question_text": "première",
+            "question_text": "une question incroyable",
             "answers": [
                 {
                     "answer_id": 1,
-                    "answer_text": "une réponse",
-                    "is_correct": false
+                    "answer_text": "une réponse vraie",
+                    "is_correct": true
                 },
                 {
                     "answer_id": 2,
-                    "answer_text": "une autre réponse",
+                    "answer_text": "une réponse moins vraie",
                     "is_correct": false
                 }
             ]
         },
         {
             "question_id": 6,
-            "question_text": "padawan",
+            "question_text": "moins qu un padawan",
             "answers": [
                 {
                     "answer_id": 1,
